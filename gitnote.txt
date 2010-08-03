@@ -1,0 +1,73 @@
+my note on git
+
+create branch 
+git branch <branch name>
+git checkout <branch name>
+
+list remote branch
+git branch -r
+checkout a remote branch 
+git checkout -b <local branch name> origin/<remote branch name>
+
+create a public git repository
+git init --bare
+echo 'the project description' > description
+
+from doc-hackers/howtos/git-shared-repository.txt
+
+Prepare the shared repository on alioth.debian.org
+  alioth:~$ umask 002
+  alioth:~$ mkdir /srv/git.debian.org/git/pkg-xorg/doc-hackers.git
+  alioth:~$ cd /srv/git.debian.org/git/pkg-xorg/doc-hackers.git
+ # alioth:doc-hackers.git$ GIT_DIR=. git-init-db --shared
+  alioth:doc-hackers.git$ GIT_DIR=. git init --shared
+  alioth:doc-hackers.git$ chmod a+x hooks/post-update
+
+On your local system
+  $ mkdir doc-hackers
+  $ cd doc-hackers
+  $ git init-db
+  $ mkdir howtos
+Edit howtos/shared-repository.txt
+  $ git add .
+  $ git commit -a -s
+
+Create a shortcut to push local repository onto alioth
+  $ cat > .git/remotes/alioth <<EOT
+  URL: ssh://alioth.debian.org/git/pkg-xorg/doc-hackers.git/
+  Push: refs/heads/master
+  EOT
+
+Publish this repository:
+  $ git push alioth
+
+git push alioth --tags
+
+To send commit log messages to a mailing list, edit hooks/update
+on alioth to update the recipients variable, and make this file
+executable. The default script sends mails with the subject as the
+description for the repo, which is probably going to be long. You can
+change the line that sets the project name as below:
+  alioth:doc-hackers.git$ edit hooks/update
+    Change the recipients variable to "debian-x@lists.debian.org"
+    Change the project variable to $(basename $GIT_DIR | sed -e 's/.git//')
+  alioth:doc-hackers.git$ chmod a+x hooks/update
+
+Provide a description of the repo
+  alioth: edit description
+
+add a remote repository
+git remote add upstream git://anongit.freedesktop.org/git/xorg/driver/xf86-video-qxl
+git remote add xsfbs git://git.debian.org/git/pkg-xorg/xsfbs.git
+git remote add alioth ssh://git.debian.org/git/pkg-xorg/driver/xserver-xorg-video-qxl.git
+
+git merge xsfbs-unstable
+
+git reset --soft HEAD^
+
+git archive --format=tar --prefix=sunpinyin-2.0.2~git`date +%Y%m%d`/ HEAD|bzip2 -9 >~/tmp/sunpinyin-2.0.2~git`date +%Y%m%d`.tar.bz2
+
+git archive --format=tar --prefix=sunpinyin-2.0.2~git`date +%Y%m%d`/ HEAD `ls|grep -v debian|grep -v wrapper`|bzip2 -9 >~/tmp/sunpinyin-2.0.2~git`date +%Y%m%d`.tar.bz2
+
+git import-orig ../chmsee-1.1.1.tar.gz
+

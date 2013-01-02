@@ -1391,6 +1391,13 @@ config SENSORS_MC13783_ADC
         help
           Support for the A/D converter on MC13783 and MC13892 PMIC.
 
+config SENSORS_XENON
+	tristate "Xenon SMC"
+	depends on PPC_XENON
+	help
+	  This driver provides support for the Xenon SMC sensors and
+	  fan control.
+
 if ACPI
 
 comment "ACPI drivers"

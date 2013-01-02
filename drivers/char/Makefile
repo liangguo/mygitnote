@@ -17,6 +17,9 @@ obj-$(CONFIG_VIOTAPE)		+= viotape.o
 obj-$(CONFIG_IBM_BSR)		+= bsr.o
 obj-$(CONFIG_SGI_MBCS)		+= mbcs.o
 obj-$(CONFIG_BFIN_OTP)		+= bfin-otp.o
+obj-$(CONFIG_XENON_SMC)  	+= xenon_smc.o
+obj-$(CONFIG_XENON_ANA)  	+= xenon_ana.o
+obj-$(CONFIG_XENON_PROBE)  	+= xenon_probe.o
 
 obj-$(CONFIG_PRINTER)		+= lp.o
 

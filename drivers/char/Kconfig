@@ -15,6 +15,26 @@ config DEVKMEM
 	  kind of kernel debugging operations.
 	  When in doubt, say "N".
 
+config XENON_SMC
+	tristate "Xenon System Management Controller (SMC)"
+	depends on PPC_XENON
+	help
+	  Character interface to the System Management controller in the
+	  Xbox 360. Allows to send arbitrary SMC commands and receive
+	  SMC replies.
+
+config XENON_ANA
+	tristate "Xenon (H)ana Character Device"
+	depends on PPC_XENON
+	help
+	  Character interface to the (H)ana chip on the Xbox 360.
+
+config XENON_PROBE
+	tristate "Xenon Memory Probe Device"
+	depends on PPC_XENON && EXPERIMENTAL
+	help
+	  Character interface to do memory probing on the Xbox 360.
+
 config STALDRV
 	bool "Stallion multiport serial support"
 	depends on SERIAL_NONSTANDARD

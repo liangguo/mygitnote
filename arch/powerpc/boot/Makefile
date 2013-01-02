@@ -177,6 +177,7 @@ image-$(CONFIG_PPC_POWERNV)		+= zImage.pseries
 image-$(CONFIG_PPC_MAPLE)		+= zImage.maple
 image-$(CONFIG_PPC_IBM_CELL_BLADE)	+= zImage.pseries
 image-$(CONFIG_PPC_PS3)			+= dtbImage.ps3
+image-$(CONFIG_PPC_XENON)		+= zImage.xenon
 image-$(CONFIG_PPC_CELLEB)		+= zImage.pseries
 image-$(CONFIG_PPC_CELL_QPACE)		+= zImage.pseries
 image-$(CONFIG_PPC_CHRP)		+= zImage.chrp
@@ -309,6 +310,11 @@ $(obj)/dtbImage.%: vmlinux $(wrapperbits) $(obj)/%.dtb
 # prefix
 $(obj)/vmlinux.strip: vmlinux
 	$(STRIP) -s -R .comment $< -o $@
+
+$(obj)/zImage.xenon: $(obj)/vmlinux.strip
+	$(OBJCOPY) -O elf32-powerpc $< $@
+	@ test -e /mnt/nfsroot/tftpboot && \
+		cp -f $@ /mnt/nfsroot/tftpboot/zImage_2.6.33.xenon || true
 
 $(obj)/uImage: vmlinux $(wrapperbits)
 	$(call if_changed,wrap,uboot)

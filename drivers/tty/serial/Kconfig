@@ -1360,4 +1360,22 @@ config SERIAL_EFM32_UART_CONSOLE
 	depends on SERIAL_EFM32_UART=y
 	select SERIAL_CORE_CONSOLE
 
+config SERIAL_XENON
+	tristate "Xenon XBOX 360 serial port support"
+	select SERIAL_CORE
+	help
+	  If you have an XBOX 360, you can enable its onboard
+	  serial port by enabling this options.
+
+	  To compile this driver as a module, choose M here: the
+	  module will be called xenon_uart.
+
+config SERIAL_XENON_CONSOLE
+	bool "Console on XBOX 360 serial port"
+	depends on SERIAL_XENON=y
+	select SERIAL_CORE_CONSOLE
+	help
+	  If you have enabled the serial port on the XBOX 360
+	  you can make it the console by answering Y to this option.
+
 endmenu

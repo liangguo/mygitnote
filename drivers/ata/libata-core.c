@@ -1900,7 +1900,7 @@ retry:
 	/* Device presence detection is unreliable on some
 	 * controllers.  Always poll IDENTIFY if available.
 	 */
-	tf.flags |= ATA_TFLAG_POLLING;
+//	tf.flags |= ATA_TFLAG_POLLING;
 
 	if (ap->ops->read_id)
 		err_mask = ap->ops->read_id(dev, &tf, id);

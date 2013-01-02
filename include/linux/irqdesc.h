@@ -110,6 +110,10 @@ static inline struct msi_desc *irq_desc_get_msi_desc(struct irq_desc *desc)
  */
 static inline void generic_handle_irq_desc(unsigned int irq, struct irq_desc *desc)
 {
+	if (!desc) {
+		printk("generic_handle_irq_desc(%u,%p) ...\n", irq, desc);
+		return;
+	}
 	desc->handle_irq(irq, desc);
 }
 

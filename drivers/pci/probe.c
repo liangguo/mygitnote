@@ -929,6 +929,8 @@ int pci_setup_device(struct pci_dev *dev)
 	struct pci_bus_region region;
 	struct resource *res;
 
+	printk("pci_setup_device() [%p,%u,%04x:%04x]\n",
+		dev->bus, dev->devfn, dev->vendor, dev->device);
 	if (pci_read_config_byte(dev, PCI_HEADER_TYPE, &hdr_type))
 		return -EIO;
 

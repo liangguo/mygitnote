@@ -230,7 +230,7 @@ void __init early_setup(unsigned long dt_ptr)
 }
 
 #ifdef CONFIG_SMP
-void early_setup_secondary(void)
+void __cpuinit early_setup_secondary(void)
 {
 	/* Mark interrupts enabled in PACA */
 	get_paca()->soft_enabled = 0;

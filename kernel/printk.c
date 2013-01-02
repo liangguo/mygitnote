@@ -713,9 +713,9 @@ static unsigned long long loops_per_msec;	/* based on boot_delay */
 
 static int __init boot_delay_setup(char *str)
 {
-	unsigned long lpj;
+	unsigned long lpj = loops_per_jiffy;
 
-	lpj = preset_lpj ? preset_lpj : 1000000;	/* some guess */
+//	lpj = preset_lpj ? preset_lpj : 1000000;	/* some guess */
 	loops_per_msec = (unsigned long long)lpj / 1000 * HZ;
 
 	get_option(&str, &boot_delay);

@@ -71,3 +71,4 @@ git archive --format=tar --prefix=sunpinyin-2.0.2~git`date +%Y%m%d`/ HEAD `ls|gr
 
 git import-orig ../chmsee-1.1.1.tar.gz
 
+push to github
